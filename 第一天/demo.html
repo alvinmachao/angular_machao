@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en" >
+    <meta charset="UTF-8">
+    <title>{{name}}</title>
+</head>
+<body>
+<input type="text" ng-model="name"/>
+
+<script src="../node_modules/angular/angular.js"></script>
+<script>
+    /*当我们引入了angular之后就会提供了一个angular 对象*/
+    //使用angular能不操作dom就操作dom
+    //双向绑定的实现，首先要将数据绑定在试图上，通过视图的改变，再将数据改变（一般能用户输入的地方才可双向绑定 input text ）
+    //在angular中，所有自带的指令都是以ng开头的
+    //将数据取到页面上    {{name}}
+    //ng-app 告诉页面以html节点来启动节点 来启动angular,启动范围一般为是html
+
+</script>
+</body>
+</html>

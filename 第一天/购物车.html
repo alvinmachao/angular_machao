@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+</head>
+<body>
+<table class="table table-bordered" ng-controller="c1" ng-cloak="">
+    <tr>
+        <td><input type="checkbox"/>全选</td>
+        <td>商品</td>
+        <td>单价</td>
+        <td>数量</td>
+        <td>小计</td>
+        <td>操作</td>
+    </tr>
+    <tr ng-repeat="value in products">
+        <td><input type="checkbox"/></td>
+        <td>{{value.name}}</td>
+        <td>
+            <button ng-click="value.count=value.count-1" ng-disabled="value.count<=1" >-</button>
+            <input type="text" ng-model="value.count"/>
+            <button ng-click="value.count=value.count+1">+</button>
+        </td>
+        <td>{{value.price}}</td>
+        <td>{{value.price*value.count}}</td>
+        <td>
+            <button class="btn btn-danger" ng-click="remove(products)">删除</button>
+        </td>
+    </tr>
+</table>
+<script src="../node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('myModule', []);
+    app.controller('c1', function ($scope) {
+        $scope.remove=function(products){
+
+        };
+        $scope.products = [
+            {name: '西部数据', price: 58, count: 1},
+            {name: '前端发展史', price: 109, count: 1},
+            {name: '史记', price: 78, count: 2},
+            {name: '野史', price: 90, count: 1}
+        ];
+    });
+</script>
+</body>
+</html>

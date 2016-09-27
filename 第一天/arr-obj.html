@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div ng-controller="c1">
+    <ul>
+        <!--循环谁就写在谁的身上
+        track by $index 添加此句话是为了避免内容有相同的情况发生
+        只要有repeat就会创建作用域
+        ng-init=就是在当前作用域下声明一个变量存储值
+        -->
+        <!--<li ng-repeat="value in arr track by $index">
+            {{value}} {{$index}} {{$even}}
+        </li>-->
+        <!-- <li ng-repeat="(key,value) in phones track by $index " ng-init="par=$index">
+             {{value.name}}
+             <ul>
+                 <li ng-repeat="(key1,value1) in value.type track by $index">
+                     {{value1}}{{key}}{{key1}}
+                 </li>
+             </ul>
+         </li>-->
+        <li ng-repeat="value in phones track by $index " ng-init="par=$index">
+            {{value.name}}
+            <ul>
+                <li ng-repeat="(key1,value1) in value.type track by $index">
+                    {{value1}}{{par}}{{key1}}
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div ng-controller="c1">
+    <ul>
+        <li ng-repeat="(key1, value) in obj">
+            {{key1}} {{value}}
+        </li>
+    </ul>
+</div>
+
+<script src="../node_modules/angular/angular.js"></script>
+<script>
+    var app = angular.module('myModule', []);
+    app.controller('c1', ['$scope', function ($scope) {
+        $scope.arr = ['sum', 'iphone', 'mi', 'sum'];
+        $scope.phones = [{name: 'sum', type: ['blue', 'gold', '']}, {
+            name: 'iphone',
+            type: ['blue', 'gold', 'red']
+        }, {name: 'mi', type: ['blue', '', 'red']}];
+        $scope.obj={
+            name:'xx',
+            age:7
+        }
+    }]);
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="module">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="c1" ng-cloak>{{name}}
+    <input type="text" ng-model="phone"/>
+
+    <div ng-controller="c2" ng-cloak>{{name}}</div>
+</div>
+
+<script src="../node_modules/angular/angular.js"></script>
+<!--
+模块化，制定当前的html 在哪运行
+angularjs一切从模块开始没通过angular.module('');
+
+-->
+<script>
+    //创建
+    //para1 模块名字
+    //para2 依赖的模块 没有就是默认[],要是不写就不是创建模块了，就是获取了
+    //para3 配置函数
+    var app = angular.module('module', []);
+    //para1 控制器的名字
+    //para2 控制器的函数
+    //特点 买一送一$scope
+
+    //不建议在$rootScope在控制器中声明  一般放在run中
+    app.run(["$rootScope",function ($rootScope) {
+        //初始化全局变量
+        $rootScope.name = 'xxx';
+    }]);
+
+
+    app.controller('c1', ["$scope", "$rootScope", function ($scope, $rootScope) {
+        //添加一个属性在当前作用域
+        $scope.name = 'lalal';
+
+        //控制器和我们的dom标签是平行的，作用域的范围就是当前标签的管理范围
+    }]);
+    app.controller('c2', ["$scope", function ($scope) {
+        $scope.name = "sss";
+    }]);
+
+
+    //angular 提供了数组的方法防止压缩，原因是字符串是不会被压缩的
+    /*app.controller('c2', ['$scope', function ($scope) {
+        $scope.name = "sss";
+    }]);*/
+</script>
+</body>
+</html>
