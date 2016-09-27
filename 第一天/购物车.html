@@ -24,14 +24,14 @@
         <td><input type="checkbox"/></td>
         <td>{{value.name}}</td>
         <td>
-            <button ng-click="value.count=value.count-1" ng-disabled="value.count<=1" >-</button>
+            <button ng-click="value.count=value.count-1" ng-disabled="value.count<=1">-</button>
             <input type="text" ng-model="value.count"/>
             <button ng-click="value.count=value.count+1">+</button>
         </td>
         <td>{{value.price}}</td>
         <td>{{value.price*value.count}}</td>
         <td>
-            <button class="btn btn-danger" ng-click="remove(products)">删除</button>
+            <button class="btn btn-danger" ng-click="remove(value)">删除</button>
         </td>
     </tr>
 </table>
@@ -39,7 +39,10 @@
 <script>
     var app = angular.module('myModule', []);
     app.controller('c1', function ($scope) {
-        $scope.remove=function(products){
+        $scope.remove = function (value) {
+            $scope.products = $scope.products.filter(function (item) {
+                return value != item;
+            });
 
         };
         $scope.products = [
@@ -49,6 +52,10 @@
             {name: '野史', price: 90, count: 1}
         ];
     });
+    /*{name: '西部数据', price: 58, count: 1},
+     {name: '前端发展史', price: 109, count: 1},
+     {name: '史记', price: 78, count: 2},
+     {name: '野史', price: 90, count: 1}*/
 </script>
 </body>
 </html>
